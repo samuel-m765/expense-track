@@ -1,0 +1,58 @@
+import { useState } from 'react';
+
+function ExpenseForm({ onAddExpense }) {
+  const [name, setName] = useState('');
+  const [category, setCategory] = useState('Food');
+  const [amount, setAmount] = useState('');
+  const [date, setDate] = useState('');
+  const [description, setDescription] = useState('');
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (!name || !amount || !date) return;
+    onAddExpense({ name, category, amount: parseFloat(amount), date, description });
+    setName('');
+    setCategory('Food');
+    setAmount('');
+    setDate('');
+    setDescription('');
+  };
+
+  return (
+    <form onSubmit={handleSubmit}>
+      <h3>Add Expense</h3>
+      <input
+        type="text"
+        placeholder="Enter expense details below"
+        value={name}
+        onChange={(e) => setName(e.target.value)}
+      />
+      <select value={category} onChange={(e) => setCategory(e.target.value)}>
+        <option value="Food">Food</option>
+        <option value="Bills">Bills</option>
+        <option value="Shopping">Shopping</option>
+        <option value="Loan">Loan</option>
+      </select>
+      <input
+        type="number"
+        placeholder="Amount"
+        value={amount}
+        onChange={(e) => setAmount(e.target.value)}
+      />
+      <input
+        type="text"
+        placeholder="mm/dd/yyyy"
+        value={date}
+        onChange={(e) => setDate(e.target.value)}
+      />
+      <textarea
+        placeholder="Description"
+        value={description}
+        onChange={(e) => setDescription(e.target.value)}
+      />
+      <button type="submit">Submit</button>
+    </form>
+  );
+}
+
+export default ExpenseForm;
