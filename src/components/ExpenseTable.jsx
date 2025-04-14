@@ -29,4 +29,4 @@ function ExpenseTable({ expenses, onDelete }) {
   );
 }
 
-export default ExpenseTable;``
+export default ExpenseTable;
